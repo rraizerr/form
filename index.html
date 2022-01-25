@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <form class="form" action="/action_page.php" method="post">
+            <input class="input-name" type="text" name="name" required="required" placeholder="Представьтесь"><br>
+            <textarea class="comment" type="text" name="text" required="required" cols="30" rows="10"
+                placeholder="Введите текст"></textarea><br>
+            <button class="btn" type="submit">Отправить</button>
+        </form>
+
+        <div class="posts">
+            <ul class="posts-list">
+                <!-- <li class="post">
+                    <span class="name">Name</span>
+                    <span class="message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur deserunt,
+                        quia, provident possimus facilis repellendus porro eos non nulla natus eligendi maxime, ipsam
+                        similique quaerat quisquam recusandae quo dolorum cum?</span>
+                </li>
+                <li class="post">
+                    <span class="name">Name</span>
+                    <span class="message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur deserunt,
+                        quia, provident possimus facilis repellendus porro eos non nulla natus eligendi maxime, ipsam
+                        similique quaerat quisquam recusandae quo dolorum cum?</span>
+                </li>
+                <li class="post">
+                    <span class="name">Name</span>
+                    <span class="message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur deserunt,
+                        quia, provident possimus facilis repellendus porro eos non nulla natus eligendi maxime, ipsam
+                        similique quaerat quisquam recusandae quo dolorum cum?</span>
+                </li> -->
+            </ul>
+        </div>
+
+        <button class="btn btn-paginaton" type="button">Показать еще</button>
+        <div class="pagination-wrapper">
+            <ul class="pagination">
+                <!-- <li><a href="#">&laquo;</a></li>
+                <li><a class="active" href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">&raquo;</a></li> -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="js/bundle.js"></script>
+</body>
+
+</html>

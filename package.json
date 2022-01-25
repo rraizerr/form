@@ -1,0 +1,11 @@
+{
+  "name": "test_form",
+  "version": "1.0.0",
+  "description": "Test",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cherkov Viacheslav",
+  "license": "ISC"
+}
