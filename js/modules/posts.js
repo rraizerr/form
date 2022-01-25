@@ -44,7 +44,7 @@ function posts() {
         .then((data) => {
             let obj = JSON.parse(JSON.stringify(data));
             // console.log(obj);
-            showLinks(obj, obj.links);
+            showLinks(obj);
             return obj.data;
         }).then(data => {
             data.forEach(({ name, text }) => {
@@ -55,33 +55,41 @@ function posts() {
     
     addPost("https://jordan.ashton.fashion/api/goods/30/comments")
 
-    let currentPage = 1; 
-    // 1. На показать еще делать новы йреквест currentPage++;
+    // let currentPage = 1; 
+    // 1. На показать еще делать новый реквест currentPage++;
 
-    function showLinks(obj, params) {
+    function showLinks(obj) {
+        const { links } = obj;
         const parent = document.querySelector(".pagination");
-        // console.log(obj.current_page);
+        const postList = document.querySelector(".posts-list");
         console.log(obj);
-        params.forEach((item, index) => {
+        links.forEach((item) => {
             const element = document.createElement("li");
-
-            if (index == obj.current_page && obj.current_page < 2) {
+            if (item.active) {
                 element.classList.add("active");
-                parent.firstElementChild.classList.add("disabled");
-                document.querySelector(".posts-list").innerHTML = "";
-                console.log(obj);
-            } else if (index == obj.current_page && obj.current_page > 1) {
-                element.classList.add("active");
-                document.querySelector(".posts-list").innerHTML = "";
+                postList.innerHTML = "";
+            }
+            // if (index == obj.current_page && obj.current_page < 2) {
+            //     element.classList.add("active");
+            //     parent.firstElementChild.classList.add("disabled");
+            //     document.querySelector(".posts-list").innerHTML = "";
+            //     console.log(obj);
+            // } else if (index == obj.current_page && obj.current_page > 1) {
+            //     element.classList.add("active");
+            //     document.querySelector(".posts-list").innerHTML = "";
             // } else if (index == obj.current_page && index == obj.last_page) {
             //     element.classList.add("active");
             //     parent.lastElementChild.classList.add("disabled");
-            }
+            // }
 
             element.innerHTML = `
                 <a href="">${item.label}</a>`;
             parent.append(element);
             
+            if (item.url == null) {
+                element.classList.add("disabled");
+            }
+
             element.addEventListener("click", e => {
                 e.preventDefault();
                 parent.innerHTML = " ";
