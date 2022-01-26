@@ -1,6 +1,6 @@
 body {
     margin: 0 auto;
-    width: 1000px;
+    max-width: 1000px;
     font-size: 16px;
 }
 
@@ -14,12 +14,13 @@ body {
 .form {
     display: flex;
     flex-direction: column;
-    /* align-items: flex-start; */
     margin: 20px 0 20px 0;
+    max-width: 550px;
+    width: 95%;
 }
 
-input,
-textarea {
+.input-name,
+.comment {
     background-color: #f7f7f7;
     border: none;
     border-radius: 5px;
@@ -28,18 +29,14 @@ textarea {
 
 }
 
-input:focus,
-textarea:focus {
+.input-name:focus,
+.comment:focus {
     background-color: #f8fcff;
     outline-color: #d1d1d1;
 }
 
-input {
+.input-name {
     width: 200px;
-}
-
-textarea {
-    width: 550px;
 }
 
 .container .btn {
@@ -52,13 +49,12 @@ textarea {
 }
 
 .posts {
-    width: 570px;
-    /* border: 1px solid black; */
+    max-width: 570px;
+    width: 95%;
 }
 
 .posts-list {
     display: flex;
-    /* flex-direction: column-reverse; */
     flex-direction: column;
     list-style: none;
     padding: 0 10px;
@@ -123,4 +119,39 @@ a {
 
 .disabled {
     pointer-events: none;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.message-wrapper {
+    margin: 0 auto;
+}
+
+.show-message {
+    font-size: 16px;
+    color: red;
+}
+
+@media screen and (max-width: 600px) {
+
+    body {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 99%;
+        margin: 0 auto;
+    }
+
+    .btn {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .pagination li {
+        margin-bottom: 10px;
+    }
 }

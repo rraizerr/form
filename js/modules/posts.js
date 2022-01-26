@@ -27,8 +27,8 @@ function posts() {
         }
     }
 
-    function showPosts(url) {
-        fetch(url)
+    async function showPosts(url) {
+        await fetch(url)
             .then((response) => {
                 return response.json();
             })
@@ -60,6 +60,7 @@ function posts() {
     function renderPaginationLinks(links) {
         const parent = document.querySelector(".pagination");
         const postList = document.querySelector(".posts-list");
+        const btn = document.querySelector(".btn-pagination");
         parent.innerHTML = "";
 
         links.forEach(link => {
@@ -80,6 +81,9 @@ function posts() {
                 postList.innerHTML = "";
                 parent.innerHTML = " ";
                 showPosts(link.url);
+                if (btn.classList.contains("hide")) {
+                    btn.classList.remove("hide");
+                }
             });
 
         });
@@ -88,7 +92,12 @@ function posts() {
     function addShowMoreButtonHandler(nextPageUrl) {
         document.querySelector(".btn-pagination").onclick = function () {
             console.log(nextPageUrl);
-            showPosts(nextPageUrl);
+            if (nextPageUrl) {
+                showPosts(nextPageUrl);
+            } else if (nextPageUrl == null) {
+                document.querySelector(".btn-pagination").classList.add("hide");
+            }
+            
         };
     }
 
