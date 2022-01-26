@@ -1,12 +1,10 @@
-import {getResource} from "../services/services"
-// Вытаскиваем посты из базы данных
+"use strict";
+
 function posts() {
     class Post {
         constructor(name, text, ...classes) {
-            // this.id = id;
             this.name = name;
             this.text = text;
-            // this.visible = visible;
             this.classes = classes;
             this.parent = document.querySelector(".posts-list");
         }
@@ -29,75 +27,69 @@ function posts() {
         }
     }
 
-    // getResource("http://localhost:3000/data")
-    // .then(data => {
-    //     data.forEach(({name, text}) => {
-    //         new Post(name, text, "post").render();
-    //     });
-    // });
-
-    function addPost(url) {
+    function showPosts(url) {
         fetch(url)
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            let obj = JSON.parse(JSON.stringify(data));
-            // console.log(obj);
-            showLinks(obj);
-            return obj.data;
-        }).then(data => {
-            data.forEach(({ name, text }) => {
-                new Post(name, text, "post").render();
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                let obj = JSON.parse(JSON.stringify(data));
+                console.log(obj);
+                renderAll(obj);
             });
+    }
+
+    showPosts("https://jordan.ashton.fashion/api/goods/30/comments");
+
+    function renderAll(commentsResponse) {
+        const {links, data: comments, "next_page_url": nextPageUrl} = commentsResponse;
+
+        renderComments(comments);
+
+        renderPaginationLinks(links);
+
+        addShowMoreButtonHandler(nextPageUrl);
+    }
+
+    function renderComments(comments) {
+        comments.forEach(({name, text}) => {
+            new Post(name, text, "post").render();
         });
     }
-    
-    addPost("https://jordan.ashton.fashion/api/goods/30/comments")
 
-    // let currentPage = 1; 
-    // 1. На показать еще делать новый реквест currentPage++;
-
-    function showLinks(obj) {
-        const { links } = obj;
+    function renderPaginationLinks(links) {
         const parent = document.querySelector(".pagination");
         const postList = document.querySelector(".posts-list");
-        console.log(obj);
-        links.forEach((item) => {
-            const element = document.createElement("li");
-            if (item.active) {
-                element.classList.add("active");
-                postList.innerHTML = "";
-            }
-            // if (index == obj.current_page && obj.current_page < 2) {
-            //     element.classList.add("active");
-            //     parent.firstElementChild.classList.add("disabled");
-            //     document.querySelector(".posts-list").innerHTML = "";
-            //     console.log(obj);
-            // } else if (index == obj.current_page && obj.current_page > 1) {
-            //     element.classList.add("active");
-            //     document.querySelector(".posts-list").innerHTML = "";
-            // } else if (index == obj.current_page && index == obj.last_page) {
-            //     element.classList.add("active");
-            //     parent.lastElementChild.classList.add("disabled");
-            // }
+        parent.innerHTML = "";
 
-            element.innerHTML = `
-                <a href="">${item.label}</a>`;
+        links.forEach(link => {
+            const element = document.createElement("li");
+            if (link.active) {
+                element.classList.add("active");
+            }
+
+            element.innerHTML = `<a href="">${link.label}</a>`;
             parent.append(element);
-            
-            if (item.url == null) {
+
+            if (link.url === null) {
                 element.classList.add("disabled");
             }
 
             element.addEventListener("click", e => {
                 e.preventDefault();
+                postList.innerHTML = "";
                 parent.innerHTML = " ";
-                addPost(item.url);
-                
+                showPosts(link.url);
             });
-                
+
         });
+    }
+
+    function addShowMoreButtonHandler(nextPageUrl) {
+        document.querySelector(".btn-pagination").onclick = function () {
+            console.log(nextPageUrl);
+            showPosts(nextPageUrl);
+        };
     }
 
 }
