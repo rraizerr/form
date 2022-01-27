@@ -1,6 +1,6 @@
 "use strict";
 
-function form() {
+function formPostRequest() {
 
     const message = {
         success: "Вы добавили новый комментарий",
@@ -58,4 +58,5 @@ function form() {
     bindPostData();
 
 }
-export default form;
+
+export default formPostRequest ;

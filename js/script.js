@@ -1,11 +1,11 @@
 "use stritc";
-import posts from "./modules/posts";
-import form from "./modules/form";
+import getPosts from "./modules/posts";
+import formPostRequest from "./modules/form";
 
 window.addEventListener("DOMContentLoaded", () => {
 
-    form();
+    formPostRequest();
     
-    posts();
+    getPosts();
 
 });

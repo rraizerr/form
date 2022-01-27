@@ -1,6 +1,6 @@
 "use strict";
 
-function posts() {
+function getPosts() {
     class Post {
         constructor(name, text, ...classes) {
             this.name = name;
@@ -34,7 +34,6 @@ function posts() {
             })
             .then((data) => {
                 let obj = JSON.parse(JSON.stringify(data));
-                console.log(obj);
                 renderAll(obj);
             });
     }
@@ -91,7 +90,6 @@ function posts() {
 
     function addShowMoreButtonHandler(nextPageUrl) {
         document.querySelector(".btn-pagination").onclick = function () {
-            console.log(nextPageUrl);
             if (nextPageUrl) {
                 showPosts(nextPageUrl);
             } else if (nextPageUrl == null) {
@@ -103,4 +101,4 @@ function posts() {
 
 }
 
-export default posts;
+export default getPosts;
